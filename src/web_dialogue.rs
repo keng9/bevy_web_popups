@@ -79,9 +79,7 @@ pub fn show_textinput(title: &str, button_label_ok: &str, create_styles: bool) {
     let button_row = doc.create_element("div").unwrap();
     popup.append_child(&button_row).unwrap();
 
-    // let button_cancel = doc.create_element("button").unwrap();
-    // button_cancel.set_text_content(Some(button_label_cancel));
-    // button_row.append_child(&button_cancel).unwrap();
+
 
     let button_ok = doc.create_element("button").unwrap();
     button_ok.set_text_content(Some(button_label_ok));
@@ -93,7 +91,6 @@ pub fn show_textinput(title: &str, button_label_ok: &str, create_styles: bool) {
     textinput.set_class_name("bevy_wasm_popup_text");
     button_row.set_class_name("bevy_wasm_popup_buttons");
     button_ok.set_class_name("bevy_wasm_popup_button");
-    // button_cancel.set_class_name("bevy_wasm_popup_button");
 
     if create_styles {
         create_style(STYLES).expect("could not create style");
@@ -109,15 +106,7 @@ pub fn show_textinput(title: &str, button_label_ok: &str, create_styles: bool) {
         .forget();
     }
 
-    // {
-    //     let root = root.clone();
-    //     let textinput: HtmlInputElement = textinput.clone().dyn_into().expect("wrong type");
-    //     EventListener::new(&button_cancel, "click", move |_event| {
-    //         send_event(WebAlertResponse::InputCancel(textinput.value()));
-    //         root.remove();
-    //     })
-    //     .forget();
-    // }
+
 }
 
 fn create_style(css: &str) -> Option<Element> {
