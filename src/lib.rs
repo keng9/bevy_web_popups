@@ -5,6 +5,9 @@ mod channel;
 #[cfg(target_family = "wasm")]
 mod web;
 
+#[cfg(target_family = "wasm")]
+mod web_dialogue;
+
 pub use plugin::{WebAlertResponse, WebAlertsPlugin};
 
 /// Show a textinput dialog using DOM elements and communicate back to the bevy side via Events `WebAlertResponse`.
@@ -39,6 +42,13 @@ pub fn show_textinput(
     }
 }
 
+#[allow(clippy::missing_const_for_fn, unused_variables)]
+pub fn show_textinput_dialogue(title: &str, button_label_ok: &str, create_styles: bool) {
+    #[cfg(target_family = "wasm")]
+    {
+        crate::web_dialogue::show_textinput(title, button_label_ok, create_styles);
+    }
+}
 /// show the browsers standard `window.alert()` using the provided `msg`.
 #[allow(clippy::missing_const_for_fn, unused_variables)]
 pub fn alert(msg: &str) {
