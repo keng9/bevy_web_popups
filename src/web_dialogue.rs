@@ -5,7 +5,7 @@ use crate::{channel::send_event, plugin::WebAlertResponse};
 
 static STYLES: &str = r"
 .bevy_wasm_popup_root { 
-   position: absolute;
+    position: absolute;
     width: 100%;
     height: 100%;
     background: #00000094;
@@ -16,7 +16,7 @@ static STYLES: &str = r"
     justify-content: center;
 }
 
-.bevy_wasm_popup_popup { 
+.bevy_wasm_popup_popup {
     background-color: #ababab;
     margin-right: auto;
     margin-left: auto;
@@ -26,31 +26,37 @@ static STYLES: &str = r"
     gap: 10px;
     padding: 12px;
     border-radius: 15px;
+    width: 80%; /* Increase the width of the dialogue window */
+    max-width: 800px; /* Add a maximum width to prevent it from being too large */
 }
 
-.bevy_wasm_popup_text { 
+.bevy_wasm_popup_text {
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
     border-color: #818181;
+    width: 100%; /* Adjust to fit within the new dialogue window size */
 }
 
-.bevy_wasm_popup_buttons { 
+.bevy_wasm_popup_buttons {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     padding: 0;
     margin: 0;
-    gap: 0;
+    gap: 10px;
 }
 
-.bevy_wasm_popup_button { 
+.bevy_wasm_popup_button {
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
     border-color: #818181;
-    flex: 1 1 0px;
+    padding: 5px 10px;
+    width: auto;
+    flex: none;
 }
 
 .bevy_wasm_popup_label { 
@@ -79,8 +85,6 @@ pub fn show_textinput(title: &str, button_label_ok: &str, create_styles: bool) {
     let button_row = doc.create_element("div").unwrap();
     popup.append_child(&button_row).unwrap();
 
-
-
     let button_ok = doc.create_element("button").unwrap();
     button_ok.set_text_content(Some(button_label_ok));
     button_row.append_child(&button_ok).unwrap();
@@ -105,8 +109,6 @@ pub fn show_textinput(title: &str, button_label_ok: &str, create_styles: bool) {
         })
         .forget();
     }
-
-
 }
 
 fn create_style(css: &str) -> Option<Element> {
